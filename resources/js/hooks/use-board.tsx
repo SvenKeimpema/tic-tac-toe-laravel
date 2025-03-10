@@ -12,7 +12,7 @@ export function useBoard() {
             }else if((bb & (1 << (x+1))) != 0) {
                 newBoard[x/2] = "O";
             }else {
-                newBoard[x/2] = "-";
+                newBoard[x/2] = "";
             }
 
             setBoard(newBoard);
