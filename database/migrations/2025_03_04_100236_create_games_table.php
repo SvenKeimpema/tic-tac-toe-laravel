@@ -14,7 +14,9 @@ return new class extends Migration
     {
         Schema::create('game', function (Blueprint $table) {
             $table->id();
-            $table->integer("board");
+            $table->integer("board")->default(0);
+            $table->foreignId("winner")->nullable()->references("id")->on("users");
+            $table->foreignId("turn")->nullable()->references("id")->on("users");
             $table->timestamps();
         });
     }
