@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\GameUser;
+use App\Models\User;
 
 class GameController extends Controller
 {
@@ -52,5 +53,13 @@ class GameController extends Controller
         });
 
         return response()->json(["found" => $games->count() > 0]);
+    }
+
+    public function userNames() {
+        $gameId = GameUser::where("user_id", auth()->id())->first()->game_id;
+        $users = GameUser::where("game_id", $gameId)->get();
+        $userNames = User::whereIn("id", $users->pluck("user_id"))->pluck("name");
+
+        return response()->json(["userNames" => $userNames]);
     }
 }

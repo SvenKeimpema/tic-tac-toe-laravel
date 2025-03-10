@@ -14,9 +14,7 @@ return new class extends Migration
     {
         Schema::create('game', function (Blueprint $table) {
             $table->id();
-//          this is in milliseconds
-            $table->integer("move_time");
-            $table->uuid("public_id")->default(Uuid::uuid4());
+            $table->integer("board");
             $table->timestamps();
         });
     }
