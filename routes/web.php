@@ -1,6 +1,9 @@
 <?php
 
 use \App\Http\Controllers\GameController;
+use \App\Http\Controllers\MatchmakingController;
+use \App\Http\Controllers\MoveController;
+use \App\Http\Controllers\BoardController;
 use \App\Models\GameUser;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,11 +35,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('game');
 
     })->name('game.play');
-    Route::post('/game/matchmake', [GameController::class, "matchmake"])->name('game.join');
-    Route::post('/game/found', [GameController::class, "found"])->name('game.found');
-    Route::post('/game/users', [GameController::class, "userNames"])->name('game.users');
-    Route::post('/game/move', [GameController::class, "move"])->name('game.move');
-    Route::post('/game/board', [GameController::class, "getBoard"])->name('game.board');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {    
+    Route::post('/game/matchmake', [MatchmakingController::class, "matchmake"])->name('game.join');
+    Route::post('/game/found', [MatchmakingController::class, "found"])->name('game.found');
+    Route::post('/game/users', [GameController::class, "getConnectedUsers"])->name('game.users');
+    Route::post('/game/move', [MoveController::class, "move"])->name('game.move');
+    Route::post('/game/board', [BoardController::class, "getBoard"])->name('game.board');
 });
 
 require __DIR__.'/settings.php';
