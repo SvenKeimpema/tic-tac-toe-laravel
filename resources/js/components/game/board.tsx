@@ -1,9 +1,18 @@
-import { useBoard } from '@/hooks/use-board';
+import { useBoardInfo } from '@/hooks/use-board';
 import { Square } from "@/components/game/square";
 import React from 'react';
+import axios from 'axios';
 
 export function Board() {
-    let board = useBoard();
+    let {board, reload} = useBoardInfo();
+
+    async function handleClick(index: number) {
+        await axios.post("/game/move", {
+            index: index
+        });
+
+        reload();
+    }
 
     return (
         <div className="grid grid-cols-3 w-fit">
@@ -15,7 +24,7 @@ export function Board() {
                             <Square
                                 key={index}
                                 value={board[index]}
-                                onClick={() => {}}
+                                onClick={() => handleClick(index)}
                             />
                         );
                     })}

@@ -16,7 +16,7 @@ export default function useMatchmaking() {
     }, [response]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-500 p-8 flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-blue-300 to-indigo-300 p-8 flex items-center justify-center">
             <Card className="w-full max-w-lg shadow-2xl backdrop-blur-sm bg-white/90">
                 <CardHeader className="text-center pb-2">
                     <CardTitle className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-indigo-600 bg-clip-text text-transparent">

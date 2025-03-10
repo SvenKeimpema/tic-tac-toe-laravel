@@ -15,6 +15,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('welcome');
     })->name('home');
     Route::get('/play/online', function () {
+        $game = GameUser::where("user_id", auth()->id())->first();
+        if(!$game) {
+            return redirect()->route('home');
+        }
         return Inertia::render('matchmaking');
     })->name('matchmaking');
     Route::get('/play/match', function () {
@@ -31,6 +35,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/game/matchmake', [GameController::class, "matchmake"])->name('game.join');
     Route::post('/game/found', [GameController::class, "found"])->name('game.found');
     Route::post('/game/users', [GameController::class, "userNames"])->name('game.users');
+    Route::post('/game/move', [GameController::class, "move"])->name('game.move');
+    Route::post('/game/board', [GameController::class, "getBoard"])->name('game.board');
 });
 
 require __DIR__.'/settings.php';
