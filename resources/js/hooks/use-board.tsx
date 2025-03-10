@@ -4,7 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 
 export type BoardInfo = {
     board: string[];
-    reload: KeyedMutator<AxiosResponse<number, any>>
+        reload: KeyedMutator<AxiosResponse<number>>
 }
 
 export function useBoardInfo(): BoardInfo {
