@@ -9,6 +9,6 @@ class Game extends Model
     protected $table = "game";
     protected $primaryKey = "id";
     public $incrementing = true;
-    protected $fillable = ["move_time"];
+    protected $fillable = ["board"];
     public $timestamps = true;
 }

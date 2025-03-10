@@ -10,7 +10,7 @@ class GameController extends Controller
 {
 
     private function create() {
-        $game_id = Game::create(["move_time" => 30000])->id;
+        $game_id = Game::create(["board" => 0])->id;
         return $game_id;
     }
 
