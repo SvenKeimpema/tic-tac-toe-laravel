@@ -19,6 +19,10 @@ class MoveController extends Controller
 
         $turn = $this->getBitCount($game->board) % 2;
 
+        if($game->board & (1 << ($request->index*2+$turn))) {
+            return response()->json(["error" => "Cell already occupied"]);
+        }
+
         $game->board |= 1 << ($request->index*2+$turn);
         
         // switch turn
