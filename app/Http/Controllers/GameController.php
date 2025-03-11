@@ -16,12 +16,12 @@ class GameController extends Controller
         return response()->json(["userNames" => $userNames]);
     }
 
-    private function create() {
+    public function create() {
         $game_id = Game::create(["board" => 0])->id;
         return $game_id;
     }
 
-    private function join_game($game_id) {
+    public function join_game($game_id) {
         GameUser::create(["game_id" => $game_id, "user_id" => auth()->id()]);
     }
 }

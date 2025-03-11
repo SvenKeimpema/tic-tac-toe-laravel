@@ -7,6 +7,12 @@ use App\Models\GameUser;
 
 class MatchmakingController extends Controller
 {
+    private GameController $gameController;
+
+    public function __construct() {
+        $this->gameController = new GameController();
+    }
+
     public function matchmake()
     {
         $games = GameUser::all(["game_id", "user_id"])
@@ -19,7 +25,7 @@ class MatchmakingController extends Controller
         if($games->count() > 0) {
             $game = $games[0];
         }else {
-            $game = $this->create();
+            $game = $this->gameController->create();
         }
 
         $game = Game::where("id", $game)->first();
@@ -29,9 +35,9 @@ class MatchmakingController extends Controller
         if($game->turn == null) {
             $game->turn = auth()->id();
         }
-        error_log($game->turn);
+        
         $game->save();
-        $this->join($game->id);
+        $this->gameController->join_game($game->id);
 
         return response("success", 200);
     }

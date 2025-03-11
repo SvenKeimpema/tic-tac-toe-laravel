@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
+use App\Models\GameUser;
+
 class BoardController extends Controller
 {
     public function getBoard() {
