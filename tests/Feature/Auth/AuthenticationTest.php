@@ -19,7 +19,7 @@ test('users can authenticate using the login screen', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route('/', absolute: false));
+    $response->assertRedirect(route('/', absolute: true));
 });
 
 test('users can not authenticate with invalid password', function () {
